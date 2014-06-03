@@ -16,8 +16,13 @@ public class SQLHandler
         conn = new SqlConnection("");
 	}
 
-    public int Login(string username, string password)
+    public bool Login(string username, string password)
     {
-        return 0;
+        return false;
+    }
+
+    public bool CreateUser(string username, string password)
+    {
+        return false;
     }
 }
