@@ -25,4 +25,24 @@ public class SQLHandler
     {
         return false;
     }
+
+    public string ListSurveys()
+    {
+        return "";
+    }
+
+    public string GetSurvey()
+    {
+        return "";
+    }
+
+    public string ListResults()
+    {
+        return "";
+    }
+
+    public string GetResult()
+    {
+        return "";
+    }
 }
