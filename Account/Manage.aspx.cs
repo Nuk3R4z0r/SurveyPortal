@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebSite1;
+using SurveyPortal;
 
 public partial class Account_Manage : System.Web.UI.Page
 {

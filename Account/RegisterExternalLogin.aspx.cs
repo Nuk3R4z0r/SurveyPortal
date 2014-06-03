@@ -2,7 +2,7 @@
 using Microsoft.Owin.Security;
 using System;
 using System.Web;
-using WebSite1;
+using SurveyPortal;
 
 public partial class Account_RegisterExternalLogin : System.Web.UI.Page
 {
