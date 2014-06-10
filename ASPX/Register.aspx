@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="Password">Re-enter Password</label>
-                    <asp:TextBox runat="server" type="password" class="form-control" id="password" placeholder="Enter password"/>
+                    <asp:TextBox runat="server" type="password" class="form-control" id="passwordconfirm" placeholder="Enter password"/>
                 </div>
 
                 <button type="submit" class="btn btn-default">Submit</button>
