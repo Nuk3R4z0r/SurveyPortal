@@ -21,24 +21,21 @@
 
                 <div class="form-group">
                     <label for="Email">Email address</label>
-                    <asp:TextBox runat="server" type="email" class="form-control" id="inputEmail" placeholder="Enter email"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="birthdate">Birthdate</label>
-                    <asp:Textbox runat="server" type="date" class="form-control" id="exampleInputEmail1" placeholder="Enter Birthdate Day-Month-Year"/>
+                    <asp:TextBox runat="server" type="email" class="form-control" id="emailBox" placeholder="Enter email"/>
                 </div>
 
                 <div class="form-group">
                     <label for="Password">Password</label>
-                    <asp:TextBox runat="server" type="password" class="form-control" id="password" placeholder="Enter password"/>
+                    <asp:TextBox runat="server" type="password" class="form-control" id="passBox" placeholder="Enter password"/>
                 </div>
                 <div class="form-group">
                     <label for="Password">Re-enter Password</label>
-                    <asp:TextBox runat="server" type="password" class="form-control" id="passwordconfirm" placeholder="Enter password"/>
+                    <asp:TextBox runat="server" type="password" class="form-control" id="confirmBox" placeholder="Enter password"/>
                 </div>
 
-                <button type="submit" class="btn btn-default">Submit</button>
+                <asp:Button runat="server" type="submit" OnClick="btnSubmit_Click" ID="btnSubmit" class="btn btn-default">Submit</asp:Button>
+                <asp:Button runat="server" type="submit" OnClick="btnCancel_Click" class="btn btn-default" ID="btnCancel">Cancel</asp:Button>
+                <asp:Label id="statusLabel" runat="server"/>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
                 <script src="js/bootstrap.min.js"></script>
             </div>
