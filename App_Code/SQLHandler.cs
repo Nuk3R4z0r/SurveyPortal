@@ -19,11 +19,18 @@ public class SQLHandler
     public bool Login(string email, string password)
     {
         var pass = from u in sql.users where u.email == email select u.password;
-        string rawr = pass.Single().ToString();
-        if (rawr == password)
-            return true;
-        else
+
+        try
+        {
+            if (pass.Single() == password)
+                return true;
+            else
+                return false;
+        }
+        catch(Exception e)
+        {
             return false;
+        }
     }
 
     public bool CreateUser(string username, string password)
