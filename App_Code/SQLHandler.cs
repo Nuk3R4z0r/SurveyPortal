@@ -9,15 +9,10 @@ using System.Data.SqlClient;
 /// </summary>
 public class SQLHandler
 {
-    SurveyPortalDBDataContext sql;
-
-	public SQLHandler()
-	{
-        sql = new SurveyPortalDBDataContext();
-	}
 
     public bool Login(string email, string password)
     {
+        SurveyPortalDBDataContext sql = new SurveyPortalDBDataContext();
         var pass = from u in sql.users where u.email == email select u.password;
 
         try
@@ -35,6 +30,7 @@ public class SQLHandler
 
     public bool CreateUser(string username, string pass)
     {
+        SurveyPortalDBDataContext sql = new SurveyPortalDBDataContext();
         user adduser = new user
         {
             email = username,
