@@ -33,9 +33,26 @@ public class SQLHandler
         }
     }
 
-    public bool CreateUser(string username, string password)
+    public bool CreateUser(string username, string pass)
     {
-        return false;
+        user adduser = new user
+        {
+            email = username,
+            password = pass
+        };
+
+        sql.users.InsertOnSubmit(adduser);
+
+        try
+        {
+            sql.SubmitChanges();
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        
     }
 
     public string ListSurveys()

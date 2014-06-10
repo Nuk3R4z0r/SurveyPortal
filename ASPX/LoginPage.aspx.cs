@@ -23,7 +23,7 @@ public partial class LoginPage : System.Web.UI.Page
             {
                 statusLabel.ForeColor = Color.Green;
                 statusLabel.Text = "Login succesful, redirecting...";
-                Response.Redirect("Default.aspx");
+                Response.Redirect("http://localhost:55882/HTML/MainPage.html");
 
             }
             else
