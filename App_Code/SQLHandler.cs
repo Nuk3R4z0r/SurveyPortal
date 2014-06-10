@@ -9,16 +9,21 @@ using System.Data.SqlClient;
 /// </summary>
 public class SQLHandler
 {
-    SqlConnection conn;
+    SurveyPortalDBDataContext sql;
 
 	public SQLHandler()
 	{
-        conn = new SqlConnection("");
+        sql = new SurveyPortalDBDataContext();
 	}
 
-    public bool Login(string username, string password)
+    public bool Login(string email, string password)
     {
-        return false;
+        var pass = from u in sql.users where u.email == email select u.password;
+        string rawr = pass.Single().ToString();
+        if (rawr == password)
+            return true;
+        else
+            return false;
     }
 
     public bool CreateUser(string username, string password)
