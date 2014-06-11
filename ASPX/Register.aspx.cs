@@ -18,15 +18,26 @@ public partial class ASPX_Register : System.Web.UI.Page
         if(passBox.Text == confirmBox.Text)
         {
             SQLHandler sql = new SQLHandler();
-            if(sql.CreateUser(emailBox.Text, passBox.Text))
+            int status = sql.CreateUser(emailBox.Text, passBox.Text, nameBox.Text);
+            if(status == 0)
             {
                 statusLabel.ForeColor = Color.Green;
                 statusLabel.Text = "User created successfully!";
             }
-            else
+            else if(status == 1)
             {
                 statusLabel.ForeColor = Color.Red;
-                statusLabel.Text = "Backend error, please try again";
+                statusLabel.Text = "Backend error, please try again.";
+            }
+            else if (status == 2)
+            {
+                statusLabel.ForeColor = Color.Red;
+                statusLabel.Text = "Name already taken.";
+            }
+            else if (status == 3)
+            {
+                statusLabel.ForeColor = Color.Red;
+                statusLabel.Text = "Email already being used.";
             }
         }
         else

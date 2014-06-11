@@ -10,28 +10,16 @@ using System.Web;
 /// </summary>
 public class SMTPHandler
 {
-    public void SendActivation(string username, string email)
+    public void SendActivation(string activation, string email, string username, string pass)
     {
-        SmtpClient client = new SmtpClient();
-        MailAddress sendTo = new MailAddress(email);
-        MailAddress from = new MailAddress("no-reply@surveyportal.com");
-        MailMessage message = new MailMessage(from, sendTo);
-        message.IsBodyHtml = false;
-        message.Subject = "SurveyPortal Validation";
-        message.Body = "Please click to following link to validate your account:\n";
-        NetworkCredential nc = new NetworkCredential("surveyportal2014@gmail.com", "pollepalle");
-        client.Host = "smtp.gmail.com";
-        client.UseDefaultCredentials = false;
-
-        client.Port = 25;
-        client.Credentials = nc;
+        SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+        client.Credentials = new NetworkCredential("surveyportal2014@gmail.com", "pollepalle");
         client.EnableSsl = true;
-        try
-        {
-            client.Send(message);
-        }
-        catch (Exception ex)
-        {
-        }
+
+        client.Send("surveyportal2014@gmail.com", email,
+            "SurveyPortal Validation", "Welcome to SurveyPortal, " + username + "!\n\n" + 
+            "Your password is: " + pass + "\nPlease click to following link to activate your account:\n" +
+            "http://localhost:50316/ASPX/Activation.aspx?code=" + activation +
+            "\n\nClick here to log in after activating your account:\n" + "http://localhost:50316/ASPX/LoginPage.aspx");
     }
 }

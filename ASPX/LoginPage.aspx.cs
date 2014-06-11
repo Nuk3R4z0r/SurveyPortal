@@ -19,16 +19,22 @@ public partial class LoginPage : System.Web.UI.Page
         SQLHandler sql = new SQLHandler();
         try
         {
-            if (sql.Login(emailBox.Text, passBox.Text))
+            int code = sql.Login(emailBox.Text, passBox.Text);
+            if (code == 0)
             {
                 statusLabel.ForeColor = Color.Green;
                 statusLabel.Text = "Login succesful, redirecting...";
                 Response.Redirect("MainPage.aspx");
             }
-            else
+            else if(code == 1)
             {
                 statusLabel.ForeColor = Color.Red;
                 statusLabel.Text = "Login failed, credentials invalid.";
+            }
+            else if (code == 2)
+            {
+                statusLabel.ForeColor = Color.Red;
+                statusLabel.Text = "Account is disabled.";
             }
         }
         catch(Exception n)

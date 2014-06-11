@@ -2,11 +2,24 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="SurveyPortalDB">
   <DataContextMoniker Name="/SurveyPortalDBDataContext" />
   <nestedChildShapes>
-    <classShape Id="bdafb0d5-d121-4482-b7d8-5c5f5f127edd" absoluteBounds="3.875, 1.125, 2, 1.3862939453125">
+    <classShape Id="69cacd4c-2051-475e-b2ee-cac048e8c8c9" absoluteBounds="4.75, 1.125, 2, 1.7708968098958331">
       <DataClassMoniker Name="/SurveyPortalDBDataContext/user" />
       <nestedChildShapes>
-        <elementListCompartment Id="2ec4010e-7238-490b-91ba-6fd8c8d7f22c" absoluteBounds="3.89, 1.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="372a21cb-749a-4a33-a4ff-d7661e481472" absoluteBounds="4.765, 1.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="76de6889-1942-4606-bed3-e674574822ee" absoluteBounds="2.625, 1.25, 2, 1.3862939453125">
+      <DataClassMoniker Name="/SurveyPortalDBDataContext/validationcode" />
+      <nestedChildShapes>
+        <elementListCompartment Id="08c53cd3-732e-4ccf-a76f-587573681e5a" absoluteBounds="2.64, 1.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.75 : 1.94314697265625); (4.625 : 1.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SurveyPortalDBDataContext/user/user_validationcode" />
+      <nodes>
+        <classShapeMoniker Id="69cacd4c-2051-475e-b2ee-cac048e8c8c9" />
+        <classShapeMoniker Id="76de6889-1942-4606-bed3-e674574822ee" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

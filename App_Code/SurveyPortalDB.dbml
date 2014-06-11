@@ -5,6 +5,17 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="password" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="username" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="isEnabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="user_validationcode" Member="validationcodes" ThisKey="id" OtherKey="userid" Type="validationcode" />
+    </Type>
+  </Table>
+  <Table Name="dbo.validationcodes" Member="validationcodes">
+    <Type Name="validationcode">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="code" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="userid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="user_validationcode" Member="user" ThisKey="userid" OtherKey="id" Type="user" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

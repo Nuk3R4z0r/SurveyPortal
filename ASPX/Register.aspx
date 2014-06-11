@@ -20,6 +20,11 @@
             <div class="panel-body">
 
                 <div class="form-group">
+                    <label for="Name">Name:</label>
+                    <asp:TextBox runat="server" class="form-control" id="nameBox" placeholder="Enter name"/>
+                </div>
+
+                <div class="form-group">
                     <label for="Email">Email address</label>
                     <asp:TextBox runat="server" type="email" class="form-control" id="emailBox" placeholder="Enter email"/>
                 </div>
