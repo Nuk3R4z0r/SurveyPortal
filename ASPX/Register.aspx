@@ -33,8 +33,8 @@
                     <asp:TextBox runat="server" type="password" class="form-control" id="confirmBox" placeholder="Enter password"/>
                 </div>
 
-                <asp:Button runat="server" type="submit" OnClick="btnSubmit_Click" ID="btnSubmit" class="btn btn-default">Submit</asp:Button>
-                <asp:Button runat="server" type="submit" OnClick="btnCancel_Click" class="btn btn-default" ID="btnCancel">Cancel</asp:Button>
+                <asp:Button runat="server" type="submit" OnClick="btnSubmit_Click" ID="btnSubmit" class="btn btn-default" Text="Submit" />
+                <asp:Button runat="server" type="submit" OnClick="btnCancel_Click" class="btn btn-default" ID="btnCancel" Text="Cancel" />
                 <asp:Label id="statusLabel" runat="server"/>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
                 <script src="js/bootstrap.min.js"></script>
