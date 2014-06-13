@@ -1,14 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="ASPX_Register" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-    <form id="form1" runat="server">
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="ASPX_Register" %>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
     
     <br />
@@ -47,6 +38,4 @@
         </div>
         </div>
     </div>
-    </form>
-</body>
-</html>
+    </asp:Content>

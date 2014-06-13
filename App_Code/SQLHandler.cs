@@ -20,9 +20,12 @@ public class SQLHandler
 
             if((bool)ena.isEnabled)
             {
-                
+
                 if (ena.password == password)
+                {
+                    HttpContext.Current.Session["user"] = ena.username;
                     return 0;
+                }
                 else
                     return 1;
             }
@@ -123,16 +126,20 @@ public class SQLHandler
     public bool ActivateAccount(string code)
     {
         SurveyPortalDBDataContext sql = new SurveyPortalDBDataContext();
-        var validation = (from v in sql.validationcodes where v.code == code select v).Single();
-        var cUser = (from u in sql.users where u.id == ((validationcode)validation).userid select u).Single();
+        try
+        {
+            var validation = (from v in sql.validationcodes where v.code == code select v).Single();
+            var cUser = (from u in sql.users where u.id == ((validationcode)validation).userid select u).Single();
 
-        cUser.isEnabled = true;
+            cUser.isEnabled = true;
 
-        sql.validationcodes.DeleteOnSubmit(validation);
+            sql.validationcodes.DeleteOnSubmit(validation);
 
-        sql.SubmitChanges();
+            sql.SubmitChanges();
+        }
+        catch (Exception e) { return false; }
         
-        return false;
+        return true;
     }
 
     public string ListSurveys()

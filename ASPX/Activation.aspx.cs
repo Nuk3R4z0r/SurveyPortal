@@ -14,7 +14,7 @@ public partial class ASPX_Activation : System.Web.UI.Page
         if(code!= null && code.Length == 16)
         {
             SQLHandler sql = new SQLHandler();
-            if(sql.ActivateAccount(code))
+            if(!sql.ActivateAccount(code))
             {
                 statusLabel.Text = "Invalid or expired verificationcode";
             }

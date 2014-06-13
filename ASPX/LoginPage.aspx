@@ -1,14 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LoginPage.aspx.cs" Inherits="LoginPage" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="LoginPage.aspx.cs" Inherits="LoginPage" %>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-    <form id="form1" runat="server" role="form">
     <div>
     <br />
     <br />
@@ -37,6 +29,4 @@
         </div>
     </div>
     </div>
-    </form>
-</body>
-</html>
+    </asp:Content>

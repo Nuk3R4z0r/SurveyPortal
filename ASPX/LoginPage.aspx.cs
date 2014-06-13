@@ -24,7 +24,7 @@ public partial class LoginPage : System.Web.UI.Page
             {
                 statusLabel.ForeColor = Color.Green;
                 statusLabel.Text = "Login succesful, redirecting...";
-                Response.Redirect("MainPage.aspx");
+                Response.Redirect("MySurveys.aspx");
             }
             else if(code == 1)
             {

@@ -3,12 +3,12 @@
     <div>
          
         
-    <div class="jumbotron col-md-8 col-md-offset-2">
-        <h1>Hello, and welcome to SurveyPortal</h1>
+    <div class="jumbotron">
+        <h2>Hello, and welcome to SurveyPortal</h2>
         <p>A place to create Surveys for your Company, hobbies and other..</p>
     </div>
 
-    <div class="col-md-8 col-md-offset-2">
+    <div>
         <p class="lead">Filler Text</p>
         <p class="lead"> More Filler Text</p>
     </div>
