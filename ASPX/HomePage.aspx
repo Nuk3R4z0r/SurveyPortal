@@ -1,15 +1,17 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="HomePage.aspx.cs" Inherits="ASPX_HomePage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
     <link href="../Content/MainCSS.css" rel="stylesheet" />
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-        <nav class="navbar navbar-default col-md-8 col-md-offset-2" role="navigation">
+    <form id="form1" runat="server">
+    <div>
+                <nav class="navbar navbar-default col-md-8 col-md-offset-2" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -49,8 +51,8 @@
         <br />
         <p class="lead"> More Filler Text</p>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    
+    </div>
+    </form>
 </body>
 </html>
