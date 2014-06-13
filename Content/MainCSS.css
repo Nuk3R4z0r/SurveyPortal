@@ -1,0 +1,13 @@
+﻿body {
+}
+
+.pull-right{
+     margin-left: 2px;
+     margin-right: 2px;
+}
+
+.jumbotron{
+    border-radius: 10px;
+    background-color: #d70909;
+    background: transparent;
+}
