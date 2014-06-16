@@ -54,11 +54,6 @@ public partial class ASPX_CreateSurvey : System.Web.UI.Page
         }
     }
 
-    protected void btnSect_Click(object sender, EventArgs e)
-    {
-        
-    }
-
     void SaveSession()
     {
         HttpContext.Current.Session["panelList"] = panelList;
@@ -66,7 +61,7 @@ public partial class ASPX_CreateSurvey : System.Web.UI.Page
         Response.Redirect(Request.RawUrl);
     }
 
-    void AddSection(string title, object o)
+    void AddSection(string title, object o, object u)
     {
         string section = "Section " + (counter + 1);
 
@@ -88,6 +83,10 @@ public partial class ASPX_CreateSurvey : System.Web.UI.Page
         divPanel.Controls.Add(divBody);
         divBody.Controls.Add(divBody2);
         divBody2.Controls.Add((Control)o);
+        if (u != null)
+        {
+            divBody2.Controls.Add((Control)u);
+        }
 
         propBox.Text = "";
 
@@ -100,18 +99,17 @@ public partial class ASPX_CreateSurvey : System.Web.UI.Page
     {
         RadioButton rdb1 = new RadioButton();
         rdb1.ID = propBox.Text + "Yes" + counter;
+        rdb1.GroupName = propBox.Text + counter;
         rdb1.Text = "Yes";
+        //rdb1.AutoPostBack = true;
 
         RadioButton rdb2 = new RadioButton();
         rdb2.ID = propBox.Text + "No" + counter;
+        rdb2.GroupName = propBox.Text + counter;
         rdb2.Text = "No";
+        //rdb2.AutoPostBack = true;
 
-        RadioButtonList rdbGroup = new RadioButtonList();
-        rdbGroup.ID = propBox.Text + "Group" + counter;
-        rdbGroup.Controls.Add(rdb1);
-        rdbGroup.Controls.Add(rdb2);
-
-        AddSection(propBox.Text, rdbGroup);
+        AddSection(propBox.Text, rdb1, rdb2);
         SaveSession();
     }
 
@@ -121,7 +119,7 @@ public partial class ASPX_CreateSurvey : System.Web.UI.Page
         txtBox.Attributes["placeholder"] = "Enter answer here";
         txtBox.ID = propBox.Text + counter;
 
-        AddSection(propBox.Text, txtBox);
+        AddSection(propBox.Text, txtBox, null);
         SaveSession();
     }
 
@@ -142,5 +140,10 @@ public partial class ASPX_CreateSurvey : System.Web.UI.Page
 
         panelList.RemoveAt(id);
         SaveSession();
+    }
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+
     }
 }

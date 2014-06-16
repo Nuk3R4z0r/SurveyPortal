@@ -7,16 +7,13 @@
                         <asp:TextBox runat="server" class="form-control" id="propBox" placeholder="Enter property"/>
                     </div>
                     <div class="form-group">
-                        <asp:Button runat="server" OnClick="btnSect_Click" class="btn btn-default" ID="btnSect" Text="New Section"/>
-                    </div>
-                    <div class="form-group">
                         <asp:Button runat="server" OnClick="btnRadio_Click" class="btn btn-default" ID="btnRadio" Text="New Radiobutton"/>
                     </div>
                     <div class="form-group">
                         <asp:Button runat="server" OnClick="btnBox_Click" class="btn btn-default" ID="btnBox" Text="New Textbox"/>
                     </div>
                     <div class="form-group">
-                        <asp:Button runat="server" OnClick="btnDelete_Click" class="btn btn-default" ID="btnSave" Text="Save & Exit"/>
+                        <asp:Button runat="server" OnClick="btnSave_Click" class="btn btn-default" ID="btnSave" Text="Save & Exit"/>
                     </div>
                 </div>
             </div>
