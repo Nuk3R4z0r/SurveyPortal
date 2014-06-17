@@ -35,10 +35,16 @@ public partial class SurveyPortalDBDataContext : System.Data.Linq.DataContext
   partial void Insertvalidationcode(validationcode instance);
   partial void Updatevalidationcode(validationcode instance);
   partial void Deletevalidationcode(validationcode instance);
+  partial void Insertsurvey(survey instance);
+  partial void Updatesurvey(survey instance);
+  partial void Deletesurvey(survey instance);
+  partial void Insertresult(result instance);
+  partial void Updateresult(result instance);
+  partial void Deleteresult(result instance);
   #endregion
 	
 	public SurveyPortalDBDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["surveyportalConnectionString3"].ConnectionString, mappingSource)
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["surveyportalConnectionString4"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}
@@ -82,6 +88,22 @@ public partial class SurveyPortalDBDataContext : System.Data.Linq.DataContext
 			return this.GetTable<validationcode>();
 		}
 	}
+	
+	public System.Data.Linq.Table<survey> surveys
+	{
+		get
+		{
+			return this.GetTable<survey>();
+		}
+	}
+	
+	public System.Data.Linq.Table<result> results
+	{
+		get
+		{
+			return this.GetTable<result>();
+		}
+	}
 }
 
 [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.users")]
@@ -102,6 +124,8 @@ public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<validationcode> _validationcodes;
 	
+	private EntitySet<survey> _surveys;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -121,6 +145,7 @@ public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
 	public user()
 	{
 		this._validationcodes = new EntitySet<validationcode>(new Action<validationcode>(this.attach_validationcodes), new Action<validationcode>(this.detach_validationcodes));
+		this._surveys = new EntitySet<survey>(new Action<survey>(this.attach_surveys), new Action<survey>(this.detach_surveys));
 		OnCreated();
 	}
 	
@@ -237,6 +262,19 @@ public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_survey", Storage="_surveys", ThisKey="id", OtherKey="userid")]
+	public EntitySet<survey> surveys
+	{
+		get
+		{
+			return this._surveys;
+		}
+		set
+		{
+			this._surveys.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -264,6 +302,18 @@ public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_validationcodes(validationcode entity)
+	{
+		this.SendPropertyChanging();
+		entity.user = null;
+	}
+	
+	private void attach_surveys(survey entity)
+	{
+		this.SendPropertyChanging();
+		entity.user = this;
+	}
+	
+	private void detach_surveys(survey entity)
 	{
 		this.SendPropertyChanging();
 		entity.user = null;
@@ -396,6 +446,432 @@ public partial class validationcode : INotifyPropertyChanging, INotifyPropertyCh
 					this._userid = default(Nullable<int>);
 				}
 				this.SendPropertyChanged("user");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.surveys")]
+public partial class survey : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _id;
+	
+	private string _name;
+	
+	private System.Nullable<int> _userid;
+	
+	private string _metadata;
+	
+	private string _creationDate;
+	
+	private string _endDate;
+	
+	private EntitySet<result> _results;
+	
+	private EntityRef<user> _user;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnuseridChanging(System.Nullable<int> value);
+    partial void OnuseridChanged();
+    partial void OnmetadataChanging(string value);
+    partial void OnmetadataChanged();
+    partial void OncreationDateChanging(string value);
+    partial void OncreationDateChanged();
+    partial void OnendDateChanging(string value);
+    partial void OnendDateChanged();
+    #endregion
+	
+	public survey()
+	{
+		this._results = new EntitySet<result>(new Action<result>(this.attach_results), new Action<result>(this.detach_results));
+		this._user = default(EntityRef<user>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int id
+	{
+		get
+		{
+			return this._id;
+		}
+		set
+		{
+			if ((this._id != value))
+			{
+				this.OnidChanging(value);
+				this.SendPropertyChanging();
+				this._id = value;
+				this.SendPropertyChanged("id");
+				this.OnidChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(16)")]
+	public string name
+	{
+		get
+		{
+			return this._name;
+		}
+		set
+		{
+			if ((this._name != value))
+			{
+				this.OnnameChanging(value);
+				this.SendPropertyChanging();
+				this._name = value;
+				this.SendPropertyChanged("name");
+				this.OnnameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", DbType="Int")]
+	public System.Nullable<int> userid
+	{
+		get
+		{
+			return this._userid;
+		}
+		set
+		{
+			if ((this._userid != value))
+			{
+				if (this._user.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnuseridChanging(value);
+				this.SendPropertyChanging();
+				this._userid = value;
+				this.SendPropertyChanged("userid");
+				this.OnuseridChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_metadata", DbType="VarChar(MAX)")]
+	public string metadata
+	{
+		get
+		{
+			return this._metadata;
+		}
+		set
+		{
+			if ((this._metadata != value))
+			{
+				this.OnmetadataChanging(value);
+				this.SendPropertyChanging();
+				this._metadata = value;
+				this.SendPropertyChanged("metadata");
+				this.OnmetadataChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creationDate", DbType="VarChar(10)")]
+	public string creationDate
+	{
+		get
+		{
+			return this._creationDate;
+		}
+		set
+		{
+			if ((this._creationDate != value))
+			{
+				this.OncreationDateChanging(value);
+				this.SendPropertyChanging();
+				this._creationDate = value;
+				this.SendPropertyChanged("creationDate");
+				this.OncreationDateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_endDate", DbType="VarChar(10)")]
+	public string endDate
+	{
+		get
+		{
+			return this._endDate;
+		}
+		set
+		{
+			if ((this._endDate != value))
+			{
+				this.OnendDateChanging(value);
+				this.SendPropertyChanging();
+				this._endDate = value;
+				this.SendPropertyChanged("endDate");
+				this.OnendDateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="survey_result", Storage="_results", ThisKey="id", OtherKey="surveyid")]
+	public EntitySet<result> results
+	{
+		get
+		{
+			return this._results;
+		}
+		set
+		{
+			this._results.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_survey", Storage="_user", ThisKey="userid", OtherKey="id", IsForeignKey=true)]
+	public user user
+	{
+		get
+		{
+			return this._user.Entity;
+		}
+		set
+		{
+			user previousValue = this._user.Entity;
+			if (((previousValue != value) 
+						|| (this._user.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._user.Entity = null;
+					previousValue.surveys.Remove(this);
+				}
+				this._user.Entity = value;
+				if ((value != null))
+				{
+					value.surveys.Add(this);
+					this._userid = value.id;
+				}
+				else
+				{
+					this._userid = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("user");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_results(result entity)
+	{
+		this.SendPropertyChanging();
+		entity.survey = this;
+	}
+	
+	private void detach_results(result entity)
+	{
+		this.SendPropertyChanging();
+		entity.survey = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.results")]
+public partial class result : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _id;
+	
+	private System.Nullable<int> _surveyid;
+	
+	private string _resultData;
+	
+	private string _submitDate;
+	
+	private EntityRef<survey> _survey;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnsurveyidChanging(System.Nullable<int> value);
+    partial void OnsurveyidChanged();
+    partial void OnresultDataChanging(string value);
+    partial void OnresultDataChanged();
+    partial void OnsubmitDateChanging(string value);
+    partial void OnsubmitDateChanged();
+    #endregion
+	
+	public result()
+	{
+		this._survey = default(EntityRef<survey>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int id
+	{
+		get
+		{
+			return this._id;
+		}
+		set
+		{
+			if ((this._id != value))
+			{
+				this.OnidChanging(value);
+				this.SendPropertyChanging();
+				this._id = value;
+				this.SendPropertyChanged("id");
+				this.OnidChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_surveyid", DbType="Int")]
+	public System.Nullable<int> surveyid
+	{
+		get
+		{
+			return this._surveyid;
+		}
+		set
+		{
+			if ((this._surveyid != value))
+			{
+				if (this._survey.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnsurveyidChanging(value);
+				this.SendPropertyChanging();
+				this._surveyid = value;
+				this.SendPropertyChanged("surveyid");
+				this.OnsurveyidChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_resultData", DbType="VarChar(MAX)")]
+	public string resultData
+	{
+		get
+		{
+			return this._resultData;
+		}
+		set
+		{
+			if ((this._resultData != value))
+			{
+				this.OnresultDataChanging(value);
+				this.SendPropertyChanging();
+				this._resultData = value;
+				this.SendPropertyChanged("resultData");
+				this.OnresultDataChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_submitDate", DbType="VarChar(10)")]
+	public string submitDate
+	{
+		get
+		{
+			return this._submitDate;
+		}
+		set
+		{
+			if ((this._submitDate != value))
+			{
+				this.OnsubmitDateChanging(value);
+				this.SendPropertyChanging();
+				this._submitDate = value;
+				this.SendPropertyChanged("submitDate");
+				this.OnsubmitDateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="survey_result", Storage="_survey", ThisKey="surveyid", OtherKey="id", IsForeignKey=true)]
+	public survey survey
+	{
+		get
+		{
+			return this._survey.Entity;
+		}
+		set
+		{
+			survey previousValue = this._survey.Entity;
+			if (((previousValue != value) 
+						|| (this._survey.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._survey.Entity = null;
+					previousValue.results.Remove(this);
+				}
+				this._survey.Entity = value;
+				if ((value != null))
+				{
+					value.results.Add(this);
+					this._surveyid = value.id;
+				}
+				else
+				{
+					this._surveyid = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("survey");
 			}
 		}
 	}

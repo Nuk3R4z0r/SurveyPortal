@@ -3,6 +3,11 @@
         <div style="float:left; width:350px; height:inherit; position:fixed" class="panel panel-default">
             <div class="col-md-12">
                 <div class="panel-body">
+                    <p>Survey Name:</p>
+                    <div class="form-group">
+                        <asp:TextBox runat="server" class="form-control" id="nameBox" placeholder="Enter survey name"/>
+                    </div>
+                    <p>Survey Items:</p>
                     <div class="form-group">
                         <asp:TextBox runat="server" class="form-control" id="propBox" placeholder="Enter property"/>
                     </div>

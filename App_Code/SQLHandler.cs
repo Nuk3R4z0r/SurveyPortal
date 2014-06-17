@@ -24,6 +24,7 @@ public class SQLHandler
                 if (ena.password == password)
                 {
                     HttpContext.Current.Session["user"] = ena.username;
+                    HttpContext.Current.Session["id"] = ena.id;
                     return 0;
                 }
                 else
@@ -43,13 +44,6 @@ public class SQLHandler
     public int CreateUser(string email, string pass, string user)
     {
         SurveyPortalDBDataContext sql = new SurveyPortalDBDataContext();
-        user adduser = new user
-        {
-            email = email,
-            password = pass,
-            username = user,
-            isEnabled = false
-        };
 
         try
         {
@@ -69,7 +63,14 @@ public class SQLHandler
             }
         }
         catch (Exception e) { }
-        
+
+        user adduser = new user
+        {
+            email = email,
+            password = pass,
+            username = user,
+            isEnabled = false
+        };
 
         sql.users.InsertOnSubmit(adduser);
 
@@ -142,9 +143,45 @@ public class SQLHandler
         return true;
     }
 
-    public string ListSurveys()
+    public List<survey> ListSurveys(int id)
     {
-        return "";
+        SurveyPortalDBDataContext sql = new SurveyPortalDBDataContext();
+        List<survey> surveyList = new List<survey>();
+
+        try
+        {
+            var surveys = from v in sql.surveys where v.userid == id select v;
+
+            foreach(survey s in surveys)
+            {
+                surveyList.Add(s);
+            }
+        }
+        catch (Exception e) {  }
+
+        return surveyList;
+    }
+
+    public bool SaveSurvey(string surveyName, int id, string surveyMetadata, string endOfLife)
+    {
+        try
+        {
+            survey addsurvey = new survey
+            {
+                name = surveyName,
+                userid = id,
+                metadata = surveyMetadata,
+                creationDate = DateTime.Now.ToShortDateString(),
+                endDate = endOfLife
+            };
+
+            SurveyPortalDBDataContext sql = new SurveyPortalDBDataContext();
+            sql.surveys.InsertOnSubmit(addsurvey);
+
+            sql.SubmitChanges();
+            return true;
+        }
+        catch (Exception e) { return false; }
     }
 
     public string GetSurvey()

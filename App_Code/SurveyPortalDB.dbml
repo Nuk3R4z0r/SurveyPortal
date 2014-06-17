@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="surveyportal" Class="SurveyPortalDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.9;Initial Catalog=surveyportal;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="surveyportalConnectionString3" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=192.168.1.14;Initial Catalog=surveyportal;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="surveyportalConnectionString4" Provider="System.Data.SqlClient" />
   <Table Name="dbo.users" Member="users">
     <Type Name="user">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -8,6 +8,7 @@
       <Column Name="username" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
       <Column Name="isEnabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="user_validationcode" Member="validationcodes" ThisKey="id" OtherKey="userid" Type="validationcode" />
+      <Association Name="user_survey" Member="surveys" ThisKey="id" OtherKey="userid" Type="survey" />
     </Type>
   </Table>
   <Table Name="dbo.validationcodes" Member="validationcodes">
@@ -16,6 +17,27 @@
       <Column Name="code" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
       <Column Name="userid" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="user_validationcode" Member="user" ThisKey="userid" OtherKey="id" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.surveys" Member="surveys">
+    <Type Name="survey">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="userid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="metadata" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="creationDate" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="endDate" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="survey_result" Member="results" ThisKey="id" OtherKey="surveyid" Type="result" />
+      <Association Name="user_survey" Member="user" ThisKey="userid" OtherKey="id" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.results" Member="results">
+    <Type Name="result">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="surveyid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="resultData" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="submitDate" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="survey_result" Member="survey" ThisKey="surveyid" OtherKey="id" Type="survey" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -69,6 +69,7 @@ public partial class SiteMaster : MasterPage
         if(HttpContext.Current.Session["user"] != null)
         {
             userLabel.Text = "Logged in as " + HttpContext.Current.Session["user"];
+            btnLogin.Text = "Log out";
         }
     }
 
@@ -79,14 +80,19 @@ public partial class SiteMaster : MasterPage
 
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        Response.Redirect("LoginPage.aspx");
+        if (HttpContext.Current.Session["user"] == null)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
+        else
+        {
+            HttpContext.Current.Session["user"] = null;
+        }
+        Response.Redirect(Request.RawUrl);
     }
 
     protected void btnChangePass_Click(object sender, EventArgs e)
     {
 
-    }
-    protected void NavigationMenu_MenuItemClick(object sender, MenuEventArgs e)
-    {
     }
 }
