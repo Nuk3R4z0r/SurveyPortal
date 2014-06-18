@@ -38,7 +38,6 @@ public partial class ASPX_CreateSurvey : System.Web.UI.Page
                         if (btnList != null)
                             div.Controls.Add(btnList[counter]);
 
-                        div.ID = "Section " + (counter + 1);
                         plcDiv.Controls.Add(div);
 
                         counter++;
@@ -61,19 +60,23 @@ public partial class ASPX_CreateSurvey : System.Web.UI.Page
     void AddSection(string title, object o, object u)
     {
         string section = "";
-        if (o is Button)
+        
+        section += title;
+        if (o.GetType() == typeof(TextBox))
         {
-            section += "but";
+            section += "tex";
         }
         else
         {
             section += "rad";
         }
-        section = title + (counter + 1);
+
+        section += (counter + 1);
 
         HtmlGenericControl divPanel = new HtmlGenericControl("DIV");
         divPanel.Attributes["class"] = "panel panel-default";
         divPanel.Attributes["runat"] = "server";
+        divPanel.ID = section;
         HtmlGenericControl divBody = new HtmlGenericControl("DIV");
         divBody.Attributes["class"] = "panel-body";
         HtmlGenericControl divBody2 = new HtmlGenericControl("DIV");
@@ -167,5 +170,10 @@ public partial class ASPX_CreateSurvey : System.Web.UI.Page
         
         SQLHandler sql = new SQLHandler();
         sql.SaveSurvey(nameBox.Text, Convert.ToInt32(HttpContext.Current.Session["id"].ToString()), metadata, null);
+
+        HttpContext.Current.Session["panelList"] = null;
+        HttpContext.Current.Session["btnList"] = null;
+
+        Response.Redirect("MySurveys.aspx");
     }
 }

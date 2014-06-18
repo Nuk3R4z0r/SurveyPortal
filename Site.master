@@ -28,7 +28,7 @@
 
                 <ul runat="server" id="WebMenu" class="nav navbar-nav">
                     <li class="active"><a href="HomePage.aspx">Home</a></li>
-                    <li><a href="CreateSurvey.aspx">My Surveys</a></li>
+                    <li><a href="MySurveys.aspx">My Surveys</a></li>
                 </ul>
                 
 

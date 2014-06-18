@@ -162,7 +162,7 @@ public class SQLHandler
         return surveyList;
     }
 
-    public bool SaveSurvey(string surveyName, int id, string surveyMetadata, string endOfLife)
+    public void SaveSurvey(string surveyName, int id, string surveyMetadata, string endOfLife)
     {
         try
         {
@@ -179,9 +179,17 @@ public class SQLHandler
             sql.surveys.InsertOnSubmit(addsurvey);
 
             sql.SubmitChanges();
-            return true;
         }
-        catch (Exception e) { return false; }
+        catch (Exception e) {}
+    }
+
+    public void DeleteSurvey(int id)
+    {
+        SurveyPortalDBDataContext sql = new SurveyPortalDBDataContext();
+        var survey = (from v in sql.surveys where v.id == id select v).Single();
+
+        sql.surveys.DeleteOnSubmit(survey);
+        sql.SubmitChanges();
     }
 
     public string GetSurvey()
